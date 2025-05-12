@@ -10,7 +10,7 @@ import {
   Users, 
   Settings, 
   Percent,
-  CarFront, // Replace LicensePlate with CarFront
+  CarFront,
   ChevronDown
 } from "lucide-react";
 import { useState } from "react";
@@ -44,11 +44,11 @@ const navItems: NavItem[] = [
     icon: Bus,
     children: [
       {
-        title: "Bus Operator",
+        title: "Bus Operators",
         href: "/bus-operators",
       },
       {
-        title: "Bus Booking",
+        title: "Bus Bookings",
         href: "/bus-bookings",
       }
     ]
@@ -71,7 +71,7 @@ const navItems: NavItem[] = [
   {
     title: "Driver Management",
     href: "/driver-management",
-    icon: CarFront, // Use CarFront icon instead
+    icon: CarFront,
   },
   {
     title: "User Management",
@@ -91,7 +91,10 @@ const navItems: NavItem[] = [
 ];
 
 export const Sidebar = ({ open, setOpen }: SidebarProps) => {
-  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
+  // Initialize expandedItems with Bus Management expanded by default
+  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({
+    "Bus Management": true
+  });
 
   const toggleSubmenu = (title: string) => {
     setExpandedItems(prev => ({
@@ -118,7 +121,7 @@ export const Sidebar = ({ open, setOpen }: SidebarProps) => {
         <nav className="flex-1 py-4 overflow-y-auto">
           <ul className="space-y-1 px-2">
             {navItems.map((item) => (
-              <li key={item.href} className="relative">
+              <li key={item.href + item.title} className="relative">
                 {item.children ? (
                   <div className="space-y-1">
                     <button
@@ -141,7 +144,7 @@ export const Sidebar = ({ open, setOpen }: SidebarProps) => {
                         </div>
                       )}
                     </button>
-                    {open && expandedItems[item.title] && (
+                    {(open && expandedItems[item.title]) && (
                       <ul className="pl-9 space-y-1">
                         {item.children.map((subItem) => (
                           <li key={subItem.href}>
