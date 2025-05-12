@@ -40,7 +40,7 @@ const navItems: NavItem[] = [
   },
   {
     title: "Bus Management",
-    href: "#",
+    href: "#", // Change to # to indicate it's just a container with no direct page
     icon: Bus,
     children: [
       {
