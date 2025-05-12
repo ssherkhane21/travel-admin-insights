@@ -10,7 +10,7 @@ import {
   Users, 
   Settings, 
   Percent,
-  LicensePlate // Add a new icon for Driver Management
+  CarFront // Replace LicensePlate with CarFront
 } from "lucide-react";
 
 type SidebarProps = {
@@ -53,7 +53,7 @@ const navItems: NavItem[] = [
   {
     title: "Driver Management",
     href: "/driver-management",
-    icon: LicensePlate,
+    icon: CarFront, // Use CarFront icon instead
   },
   {
     title: "User Management",

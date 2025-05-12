@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { LicensePlate, UserPlus } from "lucide-react";
+import { CarFront, UserPlus } from "lucide-react"; // Replace LicensePlate with CarFront
 
 type Driver = {
   id: string;
@@ -136,7 +136,7 @@ export const DriverManagementTable = () => {
                   <TableCell>{driver.name}</TableCell>
                   <TableCell>{driver.phone}</TableCell>
                   <TableCell className="flex items-center">
-                    <LicensePlate className="mr-2 h-4 w-4 text-admin-blue" />
+                    <CarFront className="mr-2 h-4 w-4 text-admin-blue" /> {/* Replace LicensePlate with CarFront */}
                     {driver.licenseNumber}
                   </TableCell>
                   <TableCell>{driver.licenseExpiry}</TableCell>
