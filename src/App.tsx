@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AdminLayout } from "./components/layout/AdminLayout";
 import Dashboard from "./pages/Dashboard";
 import BusBookings from "./pages/BusBookings";
+import BusOperators from "./pages/BusOperators";
 import HotelBookings from "./pages/HotelBookings";
 import TaxiBookings from "./pages/TaxiBookings";
 import BikeBookings from "./pages/BikeBookings";
@@ -28,6 +29,11 @@ const App = () => (
           <Route path="/" element={
             <AdminLayout>
               <Dashboard />
+            </AdminLayout>
+          } />
+          <Route path="/bus-operators" element={
+            <AdminLayout>
+              <BusOperators />
             </AdminLayout>
           } />
           <Route path="/bus-bookings" element={

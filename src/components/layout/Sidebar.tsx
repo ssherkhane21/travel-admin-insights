@@ -10,8 +10,10 @@ import {
   Users, 
   Settings, 
   Percent,
-  CarFront // Replace LicensePlate with CarFront
+  CarFront, // Replace LicensePlate with CarFront
+  ChevronDown
 } from "lucide-react";
+import { useState } from "react";
 
 type SidebarProps = {
   open: boolean;
@@ -22,6 +24,12 @@ type NavItem = {
   title: string;
   href: string;
   icon: React.ElementType;
+  children?: NavSubItem[];
+};
+
+type NavSubItem = {
+  title: string;
+  href: string;
 };
 
 const navItems: NavItem[] = [
@@ -31,9 +39,19 @@ const navItems: NavItem[] = [
     icon: LayoutDashboard,
   },
   {
-    title: "Bus Bookings",
-    href: "/bus-bookings",
+    title: "Bus Management",
+    href: "#",
     icon: Bus,
+    children: [
+      {
+        title: "Bus Operator",
+        href: "/bus-operators",
+      },
+      {
+        title: "Bus Booking",
+        href: "/bus-bookings",
+      }
+    ]
   },
   {
     title: "Hotel Bookings",
@@ -73,6 +91,15 @@ const navItems: NavItem[] = [
 ];
 
 export const Sidebar = ({ open, setOpen }: SidebarProps) => {
+  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
+
+  const toggleSubmenu = (title: string) => {
+    setExpandedItems(prev => ({
+      ...prev,
+      [title]: !prev[title]
+    }));
+  };
+
   return (
     <aside
       className={cn(
@@ -91,21 +118,67 @@ export const Sidebar = ({ open, setOpen }: SidebarProps) => {
         <nav className="flex-1 py-4 overflow-y-auto">
           <ul className="space-y-1 px-2">
             {navItems.map((item) => (
-              <li key={item.href}>
-                <NavLink
-                  to={item.href}
-                  className={({ isActive }) =>
-                    cn(
-                      "flex items-center py-2 px-3 rounded-md transition-all",
-                      isActive
-                        ? "bg-white/10 text-white"
-                        : "text-blue-100 hover:bg-white/10 hover:text-white"
-                    )
-                  }
-                >
-                  <item.icon className={cn("h-5 w-5", open ? "mr-3" : "mx-auto")} />
-                  {open && <span>{item.title}</span>}
-                </NavLink>
+              <li key={item.href} className="relative">
+                {item.children ? (
+                  <div className="space-y-1">
+                    <button
+                      onClick={() => toggleSubmenu(item.title)}
+                      className={cn(
+                        "flex items-center w-full py-2 px-3 rounded-md transition-all",
+                        "text-blue-100 hover:bg-white/10 hover:text-white"
+                      )}
+                    >
+                      <item.icon className={cn("h-5 w-5", open ? "mr-3" : "mx-auto")} />
+                      {open && (
+                        <div className="flex items-center justify-between w-full">
+                          <span>{item.title}</span>
+                          <ChevronDown 
+                            className={cn(
+                              "h-4 w-4 transition-transform", 
+                              expandedItems[item.title] ? "transform rotate-180" : ""
+                            )} 
+                          />
+                        </div>
+                      )}
+                    </button>
+                    {open && expandedItems[item.title] && (
+                      <ul className="pl-9 space-y-1">
+                        {item.children.map((subItem) => (
+                          <li key={subItem.href}>
+                            <NavLink
+                              to={subItem.href}
+                              className={({ isActive }) =>
+                                cn(
+                                  "block py-1.5 px-3 rounded-md transition-all text-sm",
+                                  isActive
+                                    ? "bg-white/10 text-white"
+                                    : "text-blue-100 hover:bg-white/10 hover:text-white"
+                                )
+                              }
+                            >
+                              {subItem.title}
+                            </NavLink>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ) : (
+                  <NavLink
+                    to={item.href}
+                    className={({ isActive }) =>
+                      cn(
+                        "flex items-center py-2 px-3 rounded-md transition-all",
+                        isActive
+                          ? "bg-white/10 text-white"
+                          : "text-blue-100 hover:bg-white/10 hover:text-white"
+                      )
+                    }
+                  >
+                    <item.icon className={cn("h-5 w-5", open ? "mr-3" : "mx-auto")} />
+                    {open && <span>{item.title}</span>}
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>
