@@ -9,7 +9,8 @@ import {
   Bike, 
   Users, 
   Settings, 
-  Percent
+  Percent,
+  LicensePlate // Add a new icon for Driver Management
 } from "lucide-react";
 
 type SidebarProps = {
@@ -48,6 +49,11 @@ const navItems: NavItem[] = [
     title: "Bike Bookings",
     href: "/bike-bookings",
     icon: Bike,
+  },
+  {
+    title: "Driver Management",
+    href: "/driver-management",
+    icon: LicensePlate,
   },
   {
     title: "User Management",

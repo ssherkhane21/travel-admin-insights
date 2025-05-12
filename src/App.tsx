@@ -11,6 +11,7 @@ import HotelBookings from "./pages/HotelBookings";
 import TaxiBookings from "./pages/TaxiBookings";
 import BikeBookings from "./pages/BikeBookings";
 import UserManagement from "./pages/UserManagement";
+import DriverManagement from "./pages/DriverManagement";
 import Commission from "./pages/Commission";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
@@ -47,6 +48,11 @@ const App = () => (
           <Route path="/bike-bookings" element={
             <AdminLayout>
               <BikeBookings />
+            </AdminLayout>
+          } />
+          <Route path="/driver-management" element={
+            <AdminLayout>
+              <DriverManagement />
             </AdminLayout>
           } />
           <Route path="/users" element={
