@@ -1,5 +1,5 @@
 
-import { Bus, Building, Car, Bicycle } from "lucide-react";
+import { Bus, Building, Car, Bike } from "lucide-react";
 import { StatsCard } from "@/components/dashboard/StatsCard";
 import { BookingChart } from "@/components/dashboard/BookingChart";
 import { RecentBookingsTable } from "@/components/dashboard/RecentBookingsTable";
@@ -39,7 +39,7 @@ const Dashboard = () => {
         <StatsCard
           title="Total Bike Bookings"
           value="432"
-          icon={Bicycle}
+          icon={Bike}
           trend={5}
           description="Last 30 days"
         />

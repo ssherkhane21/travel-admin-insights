@@ -6,7 +6,7 @@ import {
   Bus, 
   Building, 
   Car, 
-  Bicycle, 
+  Bike, 
   Users, 
   Settings, 
   Percent
@@ -47,7 +47,7 @@ const navItems: NavItem[] = [
   {
     title: "Bike Bookings",
     href: "/bike-bookings",
-    icon: Bicycle,
+    icon: Bike,
   },
   {
     title: "User Management",
